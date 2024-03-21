@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import uvicorn
 from model.model import predict_pipeline
 from model.model import __version__ as model_version
 
@@ -29,3 +30,7 @@ def testFunction():
 def predict(payload: TextIn):
     language = predict_pipeline(payload.text)
     return {"language":language}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=5000, log_level="info")
